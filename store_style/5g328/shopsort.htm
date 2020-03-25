@@ -1,0 +1,246 @@
+<!doctype html>
+<link rel="stylesheet" href="__STATIC__/xuan/default/style2.css"">
+<html lang=" en">
+<style>
+    .nav {
+        flex-wrap: nowrap !important;
+    }
+
+    .nav-link:focus {
+        background-image: -webkit-linear-gradient(right, white 94%, #6bc11e 6%);
+        outline: 0 !important;
+        font-weight: 600 !important;
+        font-size: 15px !important;
+    }
+
+    .nav-link {
+        border-radius: 0 !important;
+        width: 100% !important;
+        padding: 0.5rem 0.6rem 0.5rem 0.5rem !important;
+        font-size: 14px !important;
+        color: black !important;
+        background-color: #f8f8f8 !important;
+        font-weight: 500 !important;
+        word-break: keep-all;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 5rem;
+        flex-shrink: 0;
+    }
+</style>
+
+<head>
+    <title>分类</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="__STATIC__/xuan/default/style2.css">
+</head>
+
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <!-- Save for Web Slices (微信图片_20200116112043.jpg) -->
+    <div id="__01" style="overflow: hidden;" cellpadding="0" cellspacing="0">
+        <header class="titileBar" style="position: fixed;
+  top: 0;
+  display: flex;
+  width: 100%;
+  height: 1.7rem;
+  z-index: 3;
+  background-color: #39a5ff;">
+            <img class="caidan" src="/public/uploads/images/20000101/back.jpg" alt="" style="width: 15%;">
+            <!-- <img class="shangbiao" src="/public/uploads/images/20000101/3.11/shouye.png" alt="" style="width: 70%;"> -->
+            <div class="bui-bar-main" style="font-size: 0.8rem; width: 70%; text-align: center; display: block; line-height: 1.7rem; color: white;     word-break: keep-all;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      flex-shrink: 0;">{$info.title}</div>
+            <img class="search" src="/public/uploads/images/20000101/home.jpg" alt="" style="width: 15%;">
+            <a href="/" style="position: absolute; width: 1rem; height: 1rem;right: 0.5rem; top: 0.5rem;"></a>
+            <a href="javascript:history.back(-1)"
+                style="position: absolute; width: 1rem;height: 1rem; left: 0.5rem;top: 0.5rem;"></a>
+        </header>
+        <style>
+            #__01 .lunbo {
+                width: 100%;
+                margin-top: 1.7rem;
+                height: 5.5rem;
+
+            }
+
+            #__01 .lunbo .carousel slide {
+                width: 100% !important;
+            }
+
+            .carousel-item {
+                height: 5.5rem;
+            }
+        </style>
+        <div class="lunbo" id="lunbo">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div id="active" class="carousel-inner">
+                    {volist name=":fun('mall@storeslide',$info['id'],'wap')" id="vo"}
+                    <div class="carousel-item">
+                        <img src="{$vo['picurl']}" class="d-block w-100" alt="...">
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+            <img class="play" id="play" src="./image/play.png" alt="">
+        </div>
+        <div class="row" style="overflow: hidden;">
+            <div class="col-3" id="list">
+                <ul class="classes-menu" id="store_nav_class_menu" style="padding: 0;">
+                    {foreach name="fidlist" item="vo"}
+                    <li class="store-nav-class-sub-menu">
+                        <a class="nav-link" href="{:url('mall/shopsort/shopsort',['id'=>$id,'fid'=>$vo['id']])}"
+                            title="{$vo.name}">
+                            <i></i>{$vo.name}
+                        </a>
+                        <!-- {if condition="isset($vo['child'])"}
+                            <ul class="store-nav-class-menu-item 123">
+                                {foreach name="vo['child']" item="v"}
+                                    <li style="list-style-type:none;">
+                                        <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="{:url('mall/store/shopsort',['id'=>$id,'fid'=>$v['id']])}" title="{$v.name}" onclick="getshopcontent()">
+                                            <i></i>{$v.name}
+                                        </a>
+                                    </li>
+                                {/foreach}
+                            </ul>
+                        {/if} -->
+                    </li>
+                    {/foreach}
+                </ul>
+            </div>
+            <div class="col-9" style="background-color: white; margin-bottom: 2rem;">
+                <div style="width: 100%;" class="tab-content " id="v-pills-tabContent">
+                    <div style="overflow: auto;" class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                        aria-labelledby="v-pills-home-tab">
+                        {foreach name="fidData" item="vo"}
+                        <a style="width: 100%;height: 140px;" href="/mall/content/show/id/{$vo.id}"></a>
+                        <div class="series">
+                            {if strpos($vo.picurl,'uploads') !== false}
+                            <img class="productImg" src="/public/{$vo.picurl}" alt="">
+                            {else}
+                            <img class="productImg" src="{$vo.picurl}" alt="">
+                            {/if}
+                            <div class="wenzi">
+                                <span class="title">{$vo.title}</span>
+                                <span class="miaoshu">{$vo.title}</span>
+                                <div class="much">
+                                    <span class="price">￥{$vo.price}</span>
+                                    <span class="delete">{$vo.market_price}</span>
+                                    <img style="margin-left: 0.3rem;" src="/public/uploads/images/20000101/tianjia.png"
+                                        alt="">
+                                </div>
+                            </div>
+                        </div>
+                        {/foreach}
+                        <div class="fix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bui-scroll-foot"></div>
+        <footer>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+                integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+                crossorigin="anonymous">
+            <link rel="stylesheet" href="__STATIC__/xuan/default/style.css">
+            <style>
+                #navBar {
+                    position: fixed;
+                    bottom: 0;
+                    width: 100%;
+                    height: 1.7rem;
+                    display: flex;
+                    background-color: white;
+                    padding: 0;
+                }
+
+                #navBar .navItem {
+                    display: grid;
+                    justify-items: center;
+                    width: 2rem;
+                    font-size: 0.3rem;
+                }
+
+                #navBar .navItem img {
+                    width: 0.7rem;
+                    height: 0.7rem;
+                    border: none;
+                    background-color: #666666;
+                }
+
+                #navBar .navItem img:active {
+                    background: #84d027;
+                }
+            </style>
+            <div id="navbar" class="navbar">
+                <div class="navItem">
+                    <a style="display: block;color: #333;" href="{:url('mall/store/show',['id'=>$id])}" {if $biaoshi=='index'
+                        }active{/if}> <img style="display: block; margin: 0 auto;"
+                        src="/public/uploads/images/20000101/3.11/shouye.png" class="navImg" />首页</a>
+                </div>
+                <div class="navItem">
+                    <a style="display: block;color: #333;" href="{:url('mall/shopsort/shopsort',['id'=>$id,fid=>9])}" {if
+                        $biaoshi=='shopsort' }active{/if}> <img style="display: block; margin: 0 auto;"
+                        src="/public/uploads/images/20000101/3.11/guanyu.png" class="navImg" />商品分类</a>
+                </div>
+                <div class="navItem">
+                    <a style="display: block;color: #333;" href="{:url('mall/store/about',['id'=>$id])}" {if $biaoshi=='about'
+                        }active{/if}> <img style="display: block; margin: 0 auto;"
+                        src="/public/uploads/images/20000101/3.11/fenlei.png" class="navImg" />关于我们</a>
+                </div>
+                <div class="navItem">
+                    <a style="display: block;color: #333;" href="{:url('mall/store/contact',['id'=>$id])}" {if $biaoshi=='contact'
+                        }active{/if}> <img style="display: block; margin: 0 auto;"
+                        src="/public/uploads/images/20000101/3.11/lianxi.png" class="navImg" />联系我们</a>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+    <!-- End Save for Web Slices -->
+</body>
+<script>
+    var list = document.getElementById('list')
+    var product = document.getElementById('v-pills-home')
+    var navbar = document.getElementById('navbar')
+    var sreenHeight = window.screen.height
+    var height = sreenHeight - navbar.offsetHeight
+    list.style.height = height + 'px'
+    product.style.height = height + 'px'
+    var first = document.getElementById('store_nav_class_menu')
+    var dizhi = window.location.href
+    var hrefs = document.getElementsByClassName('nav-link')
+    var links = []
+    for(i = 0;i < hrefs.length;i++) {
+        links.push(hrefs[i].href.charAt(hrefs[i].href.length-6))
+        
+    }
+    if (dizhi.charAt(dizhi.length-6) == links[0]) {
+        first.children[0].children[0].focus()
+    }else if(dizhi.charAt(dizhi.length-6) == 9) {
+        first.children[0].children[0].click()
+    }else {
+        var now = dizhi.charAt(dizhi.length-6)
+        var index = links.indexOf(now)
+        first.children[index].children[0].focus()
+    }
+    var active = document.getElementById('active')
+    active.children[0].className += ' active';
+</script>
+
+</html>

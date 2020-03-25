@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh_CN">
+<head>
+<head>
+<title>{$seotitle}</title>
+<meta charset="utf-8" />
+<meta name="keywords" content='{block name="head_keword"}{$webdb.seo_keyword}{/block}'>
+<meta name="description" content='{block name="head_description"}{$webdb.seo_description}{/block}'>
+<script type="text/javascript" src="__STATIC__/suifeng/mall/pc/js/jquery.js"></script>
+<script type="text/javascript" src="__STATIC__/suifeng/mall/store_style/default/swiper-3.4.1.jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/suifeng/mall/pc/js/layer/layer.js"></script>
+<link rel="stylesheet" href="__STATIC__/suifeng/mall/store_style/default/global.css">
+<link rel="stylesheet" href="__STATIC__/suifeng/mall/store_style/default/css.css?v=2020">
+<link rel="stylesheet" href="__STATIC__/suifeng/mall/store_style/default/swiper-3.4.1.min.css">
+</head>
+<body>
+<div id="yx_shortcut">
+  <div class="w">
+    <ul class="fl lh" style="float:left;width:700px;">
+      <li class="fore4" id="biz-service"  style="padding:0;"><span style='padding: 0 11px 0 12px;'>欢迎您光临{$webdb.webname}！</span><s></s><span><a href="/"><span style='padding: 0 11px 0 12px;'>返回首页</span></a></li>
+    </ul>
+    <ul class="fr lh" style="float:right;">
+      {notempty name="$userdb"}
+      <li class="fore1" id="loginbar"><a href="{:get_url('member')}"><span style='color:blue'>{$userdb.username} 您好欢迎回来！</span></a> &nbsp;<span><a href="{:get_url('quit')}">[退出]</a></span></li>
+      <li class="fore2 ld"><s></s><a href="{:get_url('member')}" rel="nofollow">会员中心</a></li>
+      {else /}
+      <li class="fore1" id="loginbar"><span> <a  href="{:get_url('login')}" style="margin-right: 5px">[ 登录 ]</a> <a href="{:get_url('reg')}" title="注册">免费注册</a> </span> </li>
+      {/notempty}
+    </ul>
+    <span class="clr"></span> </div>
+</div>
+<div class="ncs-header">
+  <div class="ncs-header-container">
+    <h1 class="site-logo"><a href="{:url('mall/store/show',['id'=>$id])}"><img src="{:fun('Thumb@TT',tempdir($info.logo),150,150)}&a=l" alt=""></a></h1>
+    <div class="ncs-store-info">
+      <h2 class="ncs-store-name">{$info.title}</h2>
+      <div class="basic">
+        <div class="displayed">店铺信息<i class="arrow"></i></div>
+        <div class="sub w300">
+          <ul>
+            <li>电话：{$info.telphone}</li>
+            <li>地址：{$info.address}</li>
+          </ul>
+          <div class="btns"> {if $info.qq} <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$info.qq}&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:{$info.qq}:51" alt="点击这里给我发消息" title="点击这里给我发消息"/></a> {/if}
+            {if $info.wangwang} <a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&touid={$info.wangwang}&siteid=cntaobao&status=1&charset=utf-8"><img border="0" src="http://amos.alicdn.com/realonline.aw?v=2&uid={$info.wangwang}&site=cntaobao&s=1&charset=utf-8" alt="点击这里给我发消息" /></a> {/if} <a id="storeFavoritesBtn" href="javascript:;" class="btn btn-sm btn-warning m-l-30">收藏店铺</a> </div>
+        </div>
+      </div>
+    </div>
+    <div class="search-bar">
+      <form action="{:url('mall/content/index')}" method="get" class="search-form" >
+        <input name="keyword" id="storeSearchKeyword" type="text" class="input-text" value="" maxlength="60" placeholder=" 请输入您要搜索的商品关键字" autocomplete="off">
+        <input type="button" id="btnSearchMall" value="搜全站" class="button input-mall">
+        <input type="button" id="btnSearchStore" value="搜本店" class="button input-store">
+      </form>
+    </div>
+  </div>
+</div>
+<div class="ncsl-nav">
+  <!-- diy edit -->
+<!--  <div class="swiper-container">-->
+<!--    <div class="swiper-wrapper"> -->
+<!-- {volist name=":fun('mall@storeslide',$info['id'],'pc')" id="vo"}-->
+<!--      <div class="swiper-slide" ><a href="{$vo['url']}"><img src="{$vo['picurl']}"  /></a></div>-->
+<!--      {/volist}</div>-->
+<!--    <div class="swiper-pagination"></div>-->
+<!--    <div class="swiper-button-prev swiper-button-white"></div>-->
+<!--    <div class="swiper-button-next swiper-button-white"></div>-->
+<!--  </div>-->
+  <!-- end edit -->
+  <script>
+	 $(document).ready(function () {
+    var swiper = new Swiper('.swiper-container', {
+		autoplay: 5000,
+		 nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+		effect : 'fade',
+        pagination: '.swiper-pagination',
+        paginationClickable: true
+    });
+		 })
+    </script>
+  <div style="margin-bottom:-10px"><img src="https://oss.panyu58.com/20200311/a5b5ef48f2e9a552858785da153c7287.png" width="100%"></div>			
+  <div class="ncs-nav" id="nav" style="background:#e23c3e">
+ <ul>
+      <li class="normal ncs-nav-classes" id="store_nav_class_button"> <a href="javascript:;">商品分类<i></i></a>
+        <ul style="display: none;" class="classes-menu" id="store_nav_class_menu">
+          {foreach name="fidlist" item="vo"}
+          <li class="store-nav-class-sub-menu"><a href="{:url('mall/store/shop',['id'=>$id,'fid'=>$vo['id']])}" title="{$vo.name}"><i></i>{$vo.name}</a> {if condition="isset($vo['child'])"}
+            <ul class="store-nav-class-menu-item" style="display: none;">
+              {foreach name="vo['child']" item="v"}
+              <li><a href="{:url('mall/store/shop',['id'=>$id,'fid'=>$v['id']])}" title="{$v.name}"><i></i>{$v.name}</a></li>
+              {/foreach}
+            </ul>
+            {/if}
+            {/foreach}
+        </ul>
+      </li>
+      <li {if $biaoshi=='index'}class='active'{/if}><a href="{:url('mall/store/show',['id'=>$id])}">商家首页</a></li>
+      <li {if $biaoshi=='about'}class='active'{/if}><a href="{:url('mall/store/about',['id'=>$id])}">商家介绍</a></li>
+      <li {if $biaoshi=='shop'}class='active'{/if}><a href="{:url('mall/store/shop',['id'=>$id])}">商家商品</a></li>
+      <li {if $biaoshi=='contact'}class='active'{/if}><a href="{:url('mall/store/contact',['id'=>$id])}">联系方式</a></li>
+      <!-- diy edit -->
+<!--		<li {if $biaoshi=='contact'}class='active'{/if}><a href="{:url('mall/store/contact',['id'=>$id])}">联系方式</a></li>-->
+      <!-- end edit -->
+		<li {if $biaoshi=='contact'}class='active'{/if}><a href="/">返回主站</a></li>
+    </ul>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+     $('#btnSearchMall').on("click", function(){
+         var storeSearchKeyword = $("#storeSearchKeyword").val();
+         var url = "{:url('mall/content/index')}?keyword=" + storeSearchKeyword;
+         window.location = url;
+     });
+
+     
+     $("#btnSearchStore").on("click", function() {
+         var storeSearchKeyword = $("#storeSearchKeyword").val();
+         
+         var url = "{:url('mall/store/shop',['id'=>$id])}?keyword=" + storeSearchKeyword;
+          window.location = url;
+     });
+
+   
+    $('#store_nav_class_button').on('mouseover', function() {
+        $('#store_nav_class_menu').show();
+    });
+    $('#store_nav_class_button').on('mouseout', function() {
+        $('#store_nav_class_menu').hide();
+    });
+    $('.store-nav-class-sub-menu').on('mouseover', function() {
+        $('.store-nav-class-menu-item').hide();
+        $(this).children('.store-nav-class-menu-item').show();
+    });
+    $('.store-nav-class-sub-menu').on('mouseout', function() {
+        $('.store-nav-class-menu-item').hide();
+    });
+});
+</script>
+<div class="wrapper m-t-10">
+  <div class="ncs-main"> {block name="body_content"}页面主体部分内容{/block} </div>
+  <div class="ncs-sidebar">
+    <div class="ncs-sidebar-container ncs-top-bar">
+      <div class="title">
+        <h4>热销商品排行</h4>
+      </div>
+      <div class="content">
+        <div class="ncs-top-panel" id="hot_sales_list">
+          <ol>
+            {qb:tag name="pc_dianpu_rexiao" rows="6"  order="sellnum" by="desc" status="1" where="uid=$info[uid]"  class="app\mall\index\Labelmall@labelGetList"}
+            <li>
+              <dl>
+                <dt><a href="{$rs.url}">{$rs.title}</a></dt>
+                <dd class="goods-pic"> <a href="{$rs.url}"><img src="{$rs.picurl}" style="max-width:56px; max-height:56px"></a> </dd>
+                <dd class="price">¥{$rs.price}</dd>
+              </dl>
+            </li>
+            {/qb:tag}
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="ncs-sidebar-container ncs-top-bar">
+      <div class="title">
+        <h4>热门排行</h4>
+      </div>
+      <div class="content">
+        <div class="ncs-top-panel" id="hot_collect_list">
+          <ol>
+            {qb:tag name="pc_dianpu_remen" rows="6"  order="view" by="desc" status="1" where="uid=$info[uid]"  class="app\mall\index\Labelmall@labelGetList"}
+            <li>
+              <dl>
+                <dt><a href="{$rs.url}">{$rs.title}</a></dt>
+                <dd class="goods-pic"> <a href="{$rs.url}"><img src="{$rs.picurl}" style="max-width:56px; max-height:56px"></a> </dd>
+                <dd class="price">¥{$rs.price}</dd>
+              </dl>
+            </li>
+            {/qb:tag}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="FootContainer">
+  <div class="copyright"> All Right Reserved {$info.title} 版权所有 </div>
+</div>
+<script>
+//判断登录
+function check_login() {
+    if ("{$userdb.uid}" == "") {
+        layer.confirm('你还没登录,不能加入,你要登录吗？', {
+            btn: ['登录', '取消']
+        }, function(index) {
+            window.location.href = "{:get_url('login')}";
+        });
+        return false;
+    }
+    return true;
+}
+ //店铺收藏
+$("#storeFavoritesBtn").click(function() {
+if (check_login() !== true) return;
+$.get("{:url('mall/ajax/collection',['id'=>$info['store_id'],'type'=>2])}?time="+Math.random(),function(res){
+	layer.msg(res.data);
+});
+ 
+});
+</script> 
+</body>
+</html>
